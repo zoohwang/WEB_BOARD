@@ -2,63 +2,74 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0.1 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@page import="java.lang.String"%>
 <%@page import="java.util.regex.Pattern"%>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.DriverManager" %>
+<%@ page import="java.sql.Statement" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR"/>
     <title>게시판 - 게시글 리스트</title>            <!--윈도우 상단에 뜨는 내용-->
 </head>
-<body>
+
 <%
+    try{
+        String driverName = "com.mysql.jdbc.Driver";
+        String url = "jdbc:mysql://localhost:3306/board";
 
-    int idx = 1;
+        ResultSet rs = null;
 
-    String title = request.getParameter("title");
-    String writer = request.getParameter("writer");
-    String regdate = request.getParameter("regdate");
-    String content = request.getParameter("content");
+        Class.forName(driverName);
+        Connection con = DriverManager.getConnection(url, "root", "2413");
+        System.out.println("index page Success DB Connection");
 
-    int count = 10000;
-    if(title == "" ||title == null) out.println("title이 null입니다.");
+        Statement stmt = con.createStatement();
 
-    if(writer == "" ||writer == null)
-        out.println("writer가 null입니다.");
-    else if(!Pattern.matches("^[_0-9a-zA-Z-]+@[0-9a-zA-Z-]+(.[_0-9a-zA-Z-]+)*$", writer))
-        out.println("이메일 형식이 아닙니다.");
+        String sql = "select * from board order by idx desc";
 
-    if(regdate == "" ||regdate == null)
-        out.println("regdate가 null입니다.");
-    else if(!Pattern.matches("^[0-9]*$", regdate))
-        out.println("숫자형식이 아닙니다.");
-
-    if(content == "" ||content == null) out.println("content가 null입니다.");
-
-
-
+        rs = stmt.executeQuery(sql);
 %>
-<h1>게시글 리스트</h1>
-<table>
-    <tr>
+<body>
+    <h1>게시글 리스트</h1>
+    <table>
+        <tr>
         <th>번호</th>
         <th>제목</th>
         <th>작성자</th>
         <th>날짜</th>
         <th>조회수</th>
     </tr>
-    <tr>
-    <tr>
-        <td><%=idx %></td>
 
-        <td><%=title %></td>
+<%
+    while(rs.next()) {
+         out.print("<tr>");
 
-        <td><%=writer %></td>
+        out.print("<td>" + rs.getString(1) + "</td>");
 
-        <td><%=regdate %></td>
+        out.print("<td> <a href='content.jsp?idx="+rs.getString("idx")+"'>" + rs.getString("title") + "</a></td>");
 
-        <td><%=count %></td>
+        out.print("<td>" + rs.getString(3) + "</td>");
 
-    </tr>
-    </tr>
-</table>
-<a href="write.jsp">글쓰기</a>
+        out.print("<td>" + rs.getString(4) + "</td>");
+
+        out.print("<td>" + rs.getString(5) + "</td>");
+
+        out.print("</tr>");
+    }
+%>
+    </table>
+    <a href="write.jsp">글쓰기</a>
+
+<%
+    con.close();
+    }catch (Exception e) {
+        out.println("Oracle Database Connection Something Problem. <hr>");
+
+        out.println(e.getMessage());
+
+        e.printStackTrace();
+    }
+%>
+
 </body>
 </html>

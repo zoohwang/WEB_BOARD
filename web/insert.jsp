@@ -12,6 +12,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+
+    <style type="text/css">
+        table, td, th   {
+            border:1px solid green;
+        }
+        th{
+            background-color:green;
+            color:white;
+        }
+    </style>
+
     <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR"/>
     <title>Insert page</title>
 </head>
@@ -60,6 +71,6 @@
     }
 %>
 <body>
-
+<script>location.href="index.jsp"; </script>
 </body>
 </html>
