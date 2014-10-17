@@ -5,4 +5,16 @@
 		  http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
            version="3.0">
 
+    <servlet>
+        <servlet-name>ControllerAction</servlet-name>
+        <servlet-class>com.board.controller.ControllerAction</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ControllerAction</servlet-name>
+        <url-pattern>*.do</url-pattern>
+    </servlet-mapping>
+
 </web-app>
+
+

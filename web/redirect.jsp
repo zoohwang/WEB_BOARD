@@ -12,6 +12,6 @@
     <title></title>
 </head>
 <body>
-    <script>location.href="index.jsp"; </script>
+    <script>location.href="list.do"; </script>
 </body>
 </html>

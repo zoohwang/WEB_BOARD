@@ -9,7 +9,7 @@ public class Board {
     private String title;
     private String writer;
     private String regdate;
-    private String count;
+    private int count;
     private String content;
 
     public int getIdx() {
@@ -44,11 +44,11 @@ public class Board {
         this.regdate = regdate;
     }
 
-    public String getCount() {
+    public int getCount() {
         return count;
     }
 
-    public void setCount(String count) {
+    public void setCount(int count) {
         this.count = count;
     }
 
