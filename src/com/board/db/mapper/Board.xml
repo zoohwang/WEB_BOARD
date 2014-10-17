@@ -15,11 +15,11 @@
     </resultMap>
 
     <select id="selectAll" resultMap="result">
-        SELECT * FROM board;
+        SELECT * FROM board
     </select>
 
-    <select id="selectById" parameterType="String" resultMap="result">
-        SELECT * FROM students WHERE name = #{name}
+    <select id="selectById" parameterType="int" resultMap="result">
+        SELECT * FROM board WHERE idx = #{idx}
     </select>
 
     <insert id="insert" parameterType="Board">

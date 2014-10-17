@@ -64,13 +64,11 @@ public class ControllerAction extends HttpServlet {
             System.out.println(command);
             if(command.indexOf(request.getContextPath()) == 0) {
                 command = command.substring(request.getContextPath().length());
-                System.out.println(command);
             }
 
             com = (CommandAction) commandMap.get(command);
 
             if(com == null) {
-                System.out.println("not found: "+ command);
                 return;
             }
 
