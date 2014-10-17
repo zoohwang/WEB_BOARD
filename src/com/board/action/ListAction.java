@@ -4,6 +4,7 @@ import java.sql.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.board.beans.Board;
 import com.board.controller.CommandAction;
@@ -18,7 +19,7 @@ public class ListAction implements CommandAction {
     public String requestPro(HttpServletRequest request,
                              HttpServletResponse reaponse) throws Throwable {
 
-        ArrayList<Board> articleList = BoardDao.getInstance().getArticleList();
+        List<Board> articleList = BoardDao.getInstance().selectAll();
 
         request.setAttribute("articleList", articleList);
 
