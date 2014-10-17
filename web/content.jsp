@@ -1,9 +1,5 @@
 <%@page import="java.util.regex.Pattern"%>
-
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-
-         pageEncoding="EUC-KR"%>
-
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import="java.sql.*" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -17,43 +13,38 @@
     <title>본격! 게시판 - 게시글 조회</title>
 
 </head>
-
 <%
-
     String idx = request.getParameter("idx");
-
     try {
 
         String driverName = "com.mysql.jdbc.Driver";
         String url = "jdbc:mysql://localhost:3306/board";
-
         ResultSet rs = null;
 
-
-
         Class.forName(driverName);
-
         Connection con = DriverManager.getConnection(url, "root", "2413");
-
         out.println("Database Connection Success.");
 
-
-
         Statement stmt = con.createStatement();
-
         String sql = "select * from board where idx = " + idx ;
 
         rs = stmt.executeQuery(sql);
 
-
-
         while(rs.next()){
-
+            request.setAttribute("idx", rs.getString("idx"));
+            request.setAttribute("writer", rs.getString("writer"));
+            request.setAttribute("regdate", rs.getString("regdate"));
+            request.setAttribute("count", rs.getString("count"));
+            request.setAttribute("title", rs.getString("title"));
+            request.setAttribute("content", rs.getString("content"));
+        }
+        con.close();
+    }catch(Exception e) {
+        out.println("DB Connection Error");
+        out.println(e.getMessage());
+        e.printStackTrace();
+    }
 %>
-
-
-
-
 
 
 <body>
@@ -63,64 +54,35 @@
 <table border="1">                            <!-- border은 테두리를 표시하는 속성입니다. -->
 
     <tr>
-
         <th>번호</th>
-
-        <td><%=rs.getString("idx")%></td>
+        <td>${idx}</td>
 
         <th>작성자</th>
-
-        <td><%=rs.getString("writer")%></td>
+        <td>${writer}</td>
 
         <th>날짜</th>
-
-        <td><%=rs.getString("regdate")%></td>
+        <td>${regdate}</td>
 
         <th>조회수</th>
-
-        <td><%=rs.getString("count")%></td>
-
+        <td>${count}</td>
     </tr>
 
     <tr>
-
         <th colspan="2">제목</th>                     <!-- colspan은 행병합 속성입니다. -->
-
-        <td colspan="6"><%= rs.getString("title")%></td>
-
+        <td colspan="6">${title}</td>
     </tr>
 
     <tr>
-
         <th colspan="2">내용</th>
-
-        <td colspan="6"><%= rs.getString("content")%></td>
-
+        <td colspan="6">${content}</td>
     </tr>
 
 </table>
 
-<a href="delete.jsp?idx=<%=rs.getString("idx")%>">게시글삭제</a>
+<a href="delete.jsp?idx=${idx}">게시글삭제</a>
 
 <a href="index.jsp">목록으로</a>
 
-<%
-
-        }
-
-        con.close();
-
-    }catch (Exception e) {
-
-        out.println("Database Connection Something Problem. <hr>");
-
-        out.println(e.getMessage());
-
-        e.printStackTrace();
-
-    }
-
-%>
 
 </body>
 
