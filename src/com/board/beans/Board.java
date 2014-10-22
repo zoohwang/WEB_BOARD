@@ -11,8 +11,19 @@ public class Board {
     private String regdate;
     private int count;
     private String content;
+    private String regip;
+    
+    
+    
+    public String getRegip() {
+		return regip;
+	}
 
-    public int getIdx() {
+	public void setRegip(String regip) {
+		this.regip = regip;
+	}
+
+	public int getIdx() {
         return idx;
     }
 

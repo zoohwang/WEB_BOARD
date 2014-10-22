@@ -14,8 +14,8 @@
         <result property="content" column="content"/>
     </resultMap>
 
-    <select id="selectAll" resultMap="result">
-        SELECT * FROM board
+    <select id="selectAll" parameterType="hashmap" resultMap="result">
+        SELECT * FROM board order by idx desc LIMIT #{pageNum}, #{pageSize}
     </select>
 
     <select id="selectById" parameterType="int" resultMap="result">
@@ -43,5 +43,9 @@
 
     <select id="selectByNo" parameterType="String" resultMap="result">
         SELECT * FROM students WHERE no = #{no}
+    </select>
+    
+    <select id="selectByTotalCount" resultType="int">
+    	SELECT COUNT(*) FROM BOARD
     </select>
 </mapper>

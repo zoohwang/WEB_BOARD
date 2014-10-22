@@ -7,7 +7,7 @@ import com.board.beans.Board;
 import com.board.controller.CommandAction;
 import com.board.dao.BoardDao;
 
-public class SelectArticleAction implements CommandAction{
+public class ContentAction implements CommandAction{
 
 	@Override
 	public String requestPro(HttpServletRequest request,

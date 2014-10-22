@@ -4,7 +4,9 @@ import java.beans.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.board.beans.Board;
 
@@ -20,17 +22,24 @@ public class BoardDao extends CommonDao {
         return _instance;
     }
 
-    public List<Board> selectAll() {
+    public List<Board> selectAll(int pageNum, int pageSize) {
         List<Board> list = null;
+        Map<String, Integer> params = new HashMap<String, Integer>();
+        params.put("pageNum", pageNum);
+        params.put("pageSize", pageSize);
 
         try {
-            list = session.selectList("Board.selectAll");
+            list = session.selectList("Board.selectAll", params);
         } catch(Exception e) {
             e.printStackTrace();
         } finally {
             session.close();
         }
         return list;
+    }
+    
+    public int selectTotalCount() {
+    	return session.selectOne("Board.selectByTotalCount");
     }
     
     public Board selectById(int idx) {
