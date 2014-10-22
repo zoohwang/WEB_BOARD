@@ -27,48 +27,48 @@
     <title>Insert page</title>
 </head>
 <%
-    String title = request.getParameter("title");
-    String writer = request.getParameter("writer");
-    String regdate = request.getParameter("regdate");
-    String content = request.getParameter("content");
+//     String title = request.getParameter("title");
+//     String writer = request.getParameter("writer");
+//     String regdate = request.getParameter("regdate");
+//     String content = request.getParameter("content");
 
-    int count = 10000;
-    if(title == "" ||title == null) out.println("title이 null입니다.");
+//     int count = 10000;
+//     if(title == "" ||title == null) out.println("title이 null입니다.");
 
-    if(writer == "" ||writer == null)
-        out.println("writer가 null입니다.");
-    else if(!Pattern.matches("^[_0-9a-zA-Z-]+@[0-9a-zA-Z-]+(.[_0-9a-zA-Z-]+)*$", writer))
-        out.println("이메일 형식이 아닙니다.");
+//     if(writer == "" ||writer == null)
+//         out.println("writer가 null입니다.");
+//     else if(!Pattern.matches("^[_0-9a-zA-Z-]+@[0-9a-zA-Z-]+(.[_0-9a-zA-Z-]+)*$", writer))
+//         out.println("이메일 형식이 아닙니다.");
 
-    if(regdate == "" ||regdate == null)
-        out.println("regdate가 null입니다.");
-    else if(!Pattern.matches("^[0-9]*$", regdate))
-        out.println("숫자형식이 아닙니다.");
+//     if(regdate == "" ||regdate == null)
+//         out.println("regdate가 null입니다.");
+//     else if(!Pattern.matches("^[0-9]*$", regdate))
+//         out.println("숫자형식이 아닙니다.");
 
-    if(content == "" ||content == null) out.println("content가 null입니다.");
+//     if(content == "" ||content == null) out.println("content가 null입니다.");
 
-    try {
-        String driverName = "com.mysql.jdbc.Driver";
-        String url = "jdbc:mysql://localhost:3306/board";
+//     try {
+//         String driverName = "com.mysql.jdbc.Driver";
+//         String url = "jdbc:mysql://localhost:3306/board";
 
-        Class.forName(driverName);
-        Connection conn = DriverManager.getConnection(url, "root", "2413");
-        out.println("Success DB Connection");
-        Statement stmt = conn.createStatement();
+//         Class.forName(driverName);
+//         Connection conn = DriverManager.getConnection(url, "root", "2413");
+//         out.println("Success DB Connection");
+//         Statement stmt = conn.createStatement();
 
-        String sql = "INSERT INTO BOARD "+
+//         String sql = "INSERT INTO BOARD "+
 
-                "(title, WRITER, REGDATE, COUNT, CONTENT) "+
+//                 "(title, WRITER, REGDATE, COUNT, CONTENT) "+
 
-                "VALUES ('"+title+"', '"+writer+"', '"+regdate+"', '1', '"+content+"')";
-        System.out.println(sql);
-        stmt.executeUpdate(sql);
-        conn.close();
-    }catch(Exception e) {
-        out.println("Fault DB Connection");
-        out.println(e.getMessage());
-        e.printStackTrace();
-    }
+//                 "VALUES ('"+title+"', '"+writer+"', '"+regdate+"', '1', '"+content+"')";
+//         System.out.println(sql);
+//         stmt.executeUpdate(sql);
+//         conn.close();
+//     }catch(Exception e) {
+//         out.println("Fault DB Connection");
+//         out.println(e.getMessage());
+//         e.printStackTrace();
+//     }
 %>
 <body>
 <script>location.href="list.do"; </script>

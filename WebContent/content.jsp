@@ -10,40 +10,40 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 
-    <title>본격! 게시판 - 게시글 조회</title>
+    <title>게시글 조회</title>
 
 </head>
 <%
-    String idx = request.getParameter("idx");
-    try {
+//     String idx = request.getParameter("idx");
+//     try {
 
-        String driverName = "com.mysql.jdbc.Driver";
-        String url = "jdbc:mysql://localhost:3306/board";
-        ResultSet rs = null;
+//         String driverName = "com.mysql.jdbc.Driver";
+//         String url = "jdbc:mysql://localhost:3306/board";
+//         ResultSet rs = null;
 
-        Class.forName(driverName);
-        Connection con = DriverManager.getConnection(url, "root", "2413");
-        out.println("Database Connection Success.");
+//         Class.forName(driverName);
+//         Connection con = DriverManager.getConnection(url, "root", "2413");
+//         out.println("Database Connection Success.");
 
-        Statement stmt = con.createStatement();
-        String sql = "select * from board where idx = " + idx ;
+//         Statement stmt = con.createStatement();
+//         String sql = "select * from board where idx = " + idx ;
 
-        rs = stmt.executeQuery(sql);
+//         rs = stmt.executeQuery(sql);
 
-        while(rs.next()){
-            request.setAttribute("idx", rs.getString("idx"));
-            request.setAttribute("writer", rs.getString("writer"));
-            request.setAttribute("regdate", rs.getString("regdate"));
-            request.setAttribute("count", rs.getString("count"));
-            request.setAttribute("title", rs.getString("title"));
-            request.setAttribute("content", rs.getString("content"));
-        }
-        con.close();
-    }catch(Exception e) {
-        out.println("DB Connection Error");
-        out.println(e.getMessage());
-        e.printStackTrace();
-    }
+//         while(rs.next()){
+//             request.setAttribute("idx", rs.getString("idx"));
+//             request.setAttribute("writer", rs.getString("writer"));
+//             request.setAttribute("regdate", rs.getString("regdate"));
+//             request.setAttribute("count", rs.getString("count"));
+//             request.setAttribute("title", rs.getString("title"));
+//             request.setAttribute("content", rs.getString("content"));
+//         }
+//         con.close();
+//     }catch(Exception e) {
+//         out.println("DB Connection Error");
+//         out.println(e.getMessage());
+//         e.printStackTrace();
+//     }
 %>
 
 
@@ -55,26 +55,26 @@
 
     <tr>
         <th>번호</th>
-        <td>${idx}</td>
+        <td>${article.idx}</td>
 
         <th>작성자</th>
-        <td>${writer}</td>
+        <td>${article.writer}</td>
 
         <th>날짜</th>
-        <td>${regdate}</td>
+        <td>${article.regdate}</td>
 
         <th>조회수</th>
-        <td>${count}</td>
+        <td>${article.count}</td>
     </tr>
 
     <tr>
         <th colspan="2">제목</th>                     <!-- colspan은 행병합 속성입니다. -->
-        <td colspan="6">${title}</td>
+        <td colspan="6">${article.title}</td>
     </tr>
 
     <tr>
         <th colspan="2">내용</th>
-        <td colspan="6">${content}</td>
+        <td colspan="6">${article.content}</td>
     </tr>
 
 </table>

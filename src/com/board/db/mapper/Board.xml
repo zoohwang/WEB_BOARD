@@ -23,12 +23,13 @@
     </select>
 
     <insert id="insert" parameterType="Board">
-        INSERT INTO students (
-        name,
-        no,
-        major,
-        mobile)
-        values(#{name}, #{no}, #{major}, #{mobile})
+        INSERT INTO BOARD (
+        title,
+        writer,
+        regdate,
+        content,
+        regip)
+        values(#{title}, #{writer}, #{regdate}, #{content}, #{regip})
     </insert>
 
     <update id="update" parameterType="Board">
@@ -48,4 +49,8 @@
     <select id="selectByTotalCount" resultType="int">
     	SELECT COUNT(*) FROM BOARD
     </select>
+    
+    <update id="setArticleCount" parameterType="Board">
+    	update board set count = #{count} where idx = #{idx}
+    </update>
 </mapper>

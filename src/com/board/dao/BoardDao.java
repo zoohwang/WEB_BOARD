@@ -22,6 +22,12 @@ public class BoardDao extends CommonDao {
         return _instance;
     }
 
+    /**
+     * 선택된 페이지의 게시물을 DB에서 조회 한다.
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
     public List<Board> selectAll(int pageNum, int pageSize) {
         List<Board> list = null;
         Map<String, Integer> params = new HashMap<String, Integer>();
@@ -38,10 +44,19 @@ public class BoardDao extends CommonDao {
         return list;
     }
     
+    /**
+     * 전체 게시물의 수를 조회한다.
+     * @return
+     */
     public int selectTotalCount() {
     	return session.selectOne("Board.selectByTotalCount");
     }
     
+    /**
+     * 선택된 게시물(한개)의 내용을 조회한다.
+     * @param idx
+     * @return
+     */
     public Board selectById(int idx) {
     	Board article = new Board();
     	try {
@@ -52,5 +67,34 @@ public class BoardDao extends CommonDao {
             session.close();
         }
 		return article;
+    }
+    
+    /**
+     * 사용자가 입력한 게시물을 DB에 추가한다.
+     * @param board
+     */
+    public void insert(Board board) {
+    	try {
+    		session.insert("Board.insert", board);
+    	} catch(Exception e) {
+    		 e.printStackTrace();
+    	} finally {
+    		session.commit();
+    		session.close();
+    	}
+    }
+    
+    /**
+     * 개시글의 조회수를 업데이트 한다.(1증가)
+     */
+    public void setArticleCount(Board board) {
+    	try{
+    		session.update("setArticleCount", board);
+    	} catch(Exception e) {
+    		 e.printStackTrace();
+    	} finally {
+    		session.commit();
+    		session.close();
+    	}
     }
 }
