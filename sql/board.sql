@@ -11,3 +11,4 @@ create table board
 
 나중에 추가.
 alter table board add regip varchar(20);
+alter table board add filename varchar(50);
