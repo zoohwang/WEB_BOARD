@@ -40,8 +40,8 @@
         WHERE no = #{no}
     </update>
 
-    <delete id="delete" parameterType="String">
-        DELETE from students WHERE name = #{name}
+    <delete id="deleteById" parameterType="int">
+        DELETE from BOARD WHERE idx = #{idx}
     </delete>
 
     <select id="selectByNo" parameterType="String" resultMap="result">

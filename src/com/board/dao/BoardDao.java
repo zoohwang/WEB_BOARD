@@ -89,7 +89,7 @@ public class BoardDao extends CommonDao {
      */
     public void setArticleCount(Board board) {
     	try{
-    		session.update("setArticleCount", board);
+    		session.update("Board.setArticleCount", board);
     	} catch(Exception e) {
     		 e.printStackTrace();
     	} finally {
@@ -97,4 +97,20 @@ public class BoardDao extends CommonDao {
     		session.close();
     	}
     }
+
+    /**
+     * 게시물을 삭제한다.
+     * @param idx
+     */
+	public void deleteById(int idx) {
+		try{
+    		session.delete("Board.deleteById", idx);
+    	} catch(Exception e) {
+    		 e.printStackTrace();
+    	} finally {
+    		session.commit();
+    		session.close();
+    	}
+		
+	}
 }
