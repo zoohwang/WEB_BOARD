@@ -12,6 +12,18 @@
 
     <title>게시글 조회</title>
 
+<script>
+
+function onDownload(idx) {
+
+	var o = document.getElementById("ifrm_filedown");	
+
+	o.src = "download.do?idx="+idx;
+
+}
+
+</script>	
+
 </head>
 <%
 //     String idx = request.getParameter("idx");
@@ -49,6 +61,8 @@
 
 <body>
 
+<iframe id="ifrm_filedown"  style="position:absolute; z-index:1;visibility : hidden;"></iframe>  
+
 <h1>게시글 조회</h1>
 
 <table border="1">                            <!-- border은 테두리를 표시하는 속성입니다. -->
@@ -75,6 +89,13 @@
     <tr>
         <th colspan="2">내용</th>
         <td colspan="6">${article.content}</td>
+    </tr>
+    
+    <tr>
+    	<th colspan="2">첨부파일</th>
+    	<td colspan="8">
+    		<a href="#" onclick="onDownload('${article.idx}')">${article.filename}</a>
+    	</td>
     </tr>
 
 </table>

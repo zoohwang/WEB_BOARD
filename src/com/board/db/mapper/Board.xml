@@ -12,6 +12,7 @@
         <result property="regdate" column="regdate"/>
         <result property="count" column="count"/>
         <result property="content" column="content"/>
+        <result property="filename" column="filename"/>
     </resultMap>
 
     <select id="selectAll" parameterType="hashmap" resultMap="result">
@@ -28,8 +29,9 @@
         writer,
         regdate,
         content,
-        regip)
-        values(#{title}, #{writer}, #{regdate}, #{content}, #{regip})
+        regip,
+        filename)
+        values(#{title}, #{writer}, #{regdate}, #{content}, #{regip}, #{filename})
     </insert>
 
     <update id="update" parameterType="Board">

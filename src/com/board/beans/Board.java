@@ -12,10 +12,20 @@ public class Board {
     private int count;
     private String content;
     private String regip;
+    private String filename;
     
     
     
-    public String getRegip() {
+    
+    public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String fileName) {
+		this.filename = fileName;
+	}
+
+	public String getRegip() {
 		return regip;
 	}
 
